@@ -11,17 +11,17 @@ export async function pool(promiseList: (() => IPromise)[], limit: number) {
 
     const promise = promiseFn();
 
-    const cb = (res: any) => {
+    const onfulfilled = (res: any) => {
       poolSet.delete(promise);
       console.log(i, 'cb', res);
     };
 
-    const cb2 = (res: any) => {
+    const onrejected = (res: any) => {
       poolSet.delete(promise);
       console.log(i, 'cb2', res);
     };
 
-    promise.then(cb).catch(cb2);
+    promise.then(onfulfilled, onrejected);
     poolSet.add(promise);
     i++;
   }
