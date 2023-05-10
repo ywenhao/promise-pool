@@ -33,10 +33,8 @@ const mockRequest = () =>
     fetch(
       'https://console-mock.apipost.cn/mock/f233ab29-8e89-4f8d-ab06-c04e42cea621/mock/f233ab29-8e89-4f8d-ab06-c04e42cea621/1'
     ).finally(() => {
-      setTimeout(() => {
-        a && resolve(a);
-        !a && reject(new Error('error'));
-      }, 3000);
+      a && resolve(a);
+      !a && reject(new Error('error'));
       a = !a;
     });
   });
